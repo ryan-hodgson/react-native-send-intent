@@ -3,6 +3,8 @@ package com.burnweb.rnsendintent;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.ComponentName;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Events;
@@ -246,6 +248,22 @@ public class RNSendIntentModule extends ReactContextBaseJavaModule {
       sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       if (sendIntent.resolveActivity(this.reactContext.getPackageManager()) != null) {
           this.reactContext.startActivity(sendIntent);
+      }
+    }
+
+    @ReactMethod
+    public void openCameraApp() {
+      Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+      PackageManager packageManager = this.reactContext.getPackageManager();
+      ResolveInfo resolveInfo = packageManager.resolveActivity(intent, 0);
+      if (resolveInfo != null) {
+        Intent sendIntent = new Intent();
+        sendIntent.setComponent(new ComponentName(resolveInfo.activityInfo.packageName,
+          resolveInfo.activityInfo.name));
+        sendIntent.setAction(Intent.ACTION_MAIN);
+        sendIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.reactContext.startActivity(sendIntent);
       }
     }
 
