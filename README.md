@@ -196,6 +196,12 @@ SendIntentAndroid.openCalendar();
 SendIntentAndroid.openCamera();
 ```
 
+## Example / Open Camera Application
+
+```javascript
+SendIntentAndroid.openCameraApp();
+```
+
 ## Example / Open Email Application
 
 ```javascript

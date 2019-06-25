@@ -59,6 +59,9 @@ var SendIntentAndroid = {
     openCamera() {
         RNSendIntentAndroid.openCamera();
     },
+    openCameraApp() {
+        RNSendIntentAndroid.openCameraApp();
+    },
     openMapsWithRoute(query, mode) {
         RNSendIntentAndroid.openMapsWithRoute(query, mode);
     },
